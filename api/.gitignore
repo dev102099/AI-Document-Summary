@@ -14,8 +14,8 @@ target/
 .sts4-cache
 
 # Ignore configuration files with sensitive data
-/src/main/resources/application.properties
-/src/main/resources/application.yml
+api/src/main/resources/application.properties
+
 
 ### IntelliJ IDEA ###
 .idea
