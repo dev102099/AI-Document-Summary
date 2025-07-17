@@ -41,10 +41,7 @@ A sleek, responsive web app that uses AI to generate concise summaries from uplo
 - Java 21 installed
 - Maven (or use Spring Boot’s built-in wrapper)
 - Node.js v18+
-- A Cohere API key (https://cohere.com) [update the key at :
-  Cohere cohere = Cohere.builder()
-  .token(your api key)
-  .build(); in service section.]
+- A Cohere API key (https://cohere.com) [Update your key in application.properties]
 
 ---
 
