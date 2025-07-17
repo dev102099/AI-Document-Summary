@@ -56,3 +56,9 @@ A sleek, responsive web app that uses AI to generate concise summaries from uplo
 git clone https://github.com/your-username/ai-document-summarizer.git
 cd ai-document-summarizer
 ```
+
+## 📬 Contact
+
+Dev Parpyani
+📧 devparpyani@gmail.com
+www.linkedin.com/in/dev-p-42449822a

@@ -3,6 +3,8 @@ package com.example.api.service;
 import com.cohere.api.Cohere;
 import com.cohere.api.requests.ChatRequest;
 import com.cohere.api.types.NonStreamedChatResponse;
+import com.example.api.config.CohereConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +18,9 @@ import java.io.IOException;
 public class SummaryService {
     private final Tika tika = new Tika();
 
+    @Autowired
+    private CohereConfig config;
+
     public String extractedText(MultipartFile file) throws IOException, TikaException {
         String data = tika.parseToString(file.getInputStream());
         return data;
@@ -23,7 +28,7 @@ public class SummaryService {
 
     public String summarize(String text) {
         Cohere cohere = Cohere.builder()
-                .token("YOUR_COHERE_API_KEY") // Replace with your actual API key
+                .token(config.getApiKey()) // Replace with your actual API key
                 .build();
 
         NonStreamedChatResponse response = cohere.chat(
