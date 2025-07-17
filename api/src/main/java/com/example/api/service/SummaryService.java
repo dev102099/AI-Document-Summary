@@ -21,10 +21,9 @@ public class SummaryService {
         return data;
     }
 
-
     public String summarize(String text) {
         Cohere cohere = Cohere.builder()
-                .token("G7MKdFhYkwtGeBBMeLqb9yMfnY35PJM2X58Ff7o8")
+                .token("YOUR_COHERE_API_KEY") // Replace with your actual API key
                 .build();
 
         NonStreamedChatResponse response = cohere.chat(
