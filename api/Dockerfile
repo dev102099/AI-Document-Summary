@@ -1,18 +1,24 @@
-# Use Amazon Corretto 21 base image (Java 21)
-FROM amazoncorretto:21-alpine
+# Use Maven to build the application
+FROM maven:3.9.6-eclipse-temurin-21 as build
 
-# Set working directory
 WORKDIR /app
 
 # Copy pom.xml and download dependencies first
 COPY pom.xml ./
-RUN apk add --no-cache maven && mvn dependency:go-offline
-
-# Copy the rest of the project
-COPY . .
-
-# Package the app
+COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Run the Spring Boot app
-CMD ["java", "-jar", "target/*.jar"]
+# Use a smaller image to run the app
+FROM eclipse-temurin:21-jdk-alpine
+
+WORKDIR /app
+
+# Copy the jar from the builder stage
+COPY --from=build /app/target/*.jar app.jar
+
+# Expose port 8080 (Spring Boot default)
+EXPOSE 8080
+
+# Run the application
+CMD ["java", "-jar", "app.jar"]
+
