@@ -19,6 +19,7 @@ A sleek, responsive web app that uses AI to generate concise summaries from uplo
 - Spring Web + Multipart support
 - Cohere AI API
 - RESTful APIs
+- Apache Tika (Text extraction)
 
 ---
 
