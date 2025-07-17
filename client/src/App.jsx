@@ -19,7 +19,7 @@ function App() {
 
       const formData = new FormData();
       formData.append("file", file);
-      console.log("FormData contents:", [...formData.entries()]);
+
       const res = await fetch(
         "https://ai-document-summary-backend.onrender.com/summarize",
         {
@@ -67,7 +67,7 @@ function App() {
               }}
               accept=".pdf,.doc,.docx,.txt"
             />
-            {console.log(file)}
+
             <label
               htmlFor="fileInput"
               className="text-white cursor-pointer font-semibold  font-roboto"
@@ -97,7 +97,6 @@ function App() {
                 cursorStyle="_"
                 typeSpeed={10}
                 onTypeDone={() => {
-                  console.log("Typing finished");
                   handleDone();
                 }}
               />
