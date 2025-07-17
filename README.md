@@ -32,6 +32,8 @@ A sleek, responsive web app that uses AI to generate concise summaries from uplo
 - ❌ Error handling for failed uploads or summaries
 - 🎨 Beautiful, minimal UI with dark theme
 
+- demo : https://ai-document-summary.onrender.com
+
 ---
 
 ## 📦 Installation
