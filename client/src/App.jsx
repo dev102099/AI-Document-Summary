@@ -20,10 +20,13 @@ function App() {
       const formData = new FormData();
       formData.append("file", file);
       console.log("FormData contents:", [...formData.entries()]);
-      const res = await fetch("http://localhost:8080/summarize", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        "https://ai-document-summary-backend.onrender.com/summarize",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
       const text = await res.json();
       setSummary(text.Summary);
       if (res.ok) {
