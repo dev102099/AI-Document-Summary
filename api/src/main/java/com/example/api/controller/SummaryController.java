@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Map;
 
-
 @RestController
 public class SummaryController {
     @Autowired
@@ -21,14 +20,27 @@ public class SummaryController {
 
     @CrossOrigin(origins = "https://ai-document-summary.onrender.com")
     @PostMapping("/summarize")
-    public ResponseEntity<?> returnSummary(@RequestParam("file")MultipartFile file){
+    public ResponseEntity<?> returnSummary(@RequestParam("file") MultipartFile file) {
         try {
+            System.out.println("Endpoint hit! File received: " + file.getOriginalFilename());
+
             String text = summaryService.extractedText(file);
+            System.out.println("Text extracted successfully.");
+
             String summary = summaryService.summarize(text);
-            return ResponseEntity.ok().body(Map.of("Summary",summary));
-        }
-        catch (IOException| TikaException e){
+            System.out.println("Summary generated successfully.");
+
+            return ResponseEntity.ok().body(Map.of("Summary", summary));
+
+        } catch (IOException | TikaException e) {
+            System.err.println("File parsing error: " + e.getMessage());
             return ResponseEntity.status(500).body("Failed to extract text: " + e.getMessage());
+
+        } catch (Exception e) {
+            // This will catch AI API errors, NullPointers, etc.
+            System.err.println("Unexpected Server Error: " + e.getMessage());
+            e.printStackTrace(); // Prints the full stack trace to your terminal
+            return ResponseEntity.status(500).body("Internal Server Error: " + e.getMessage());
         }
     }
 }

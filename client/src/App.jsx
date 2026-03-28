@@ -25,11 +25,12 @@ function App() {
         {
           method: "POST",
           body: formData,
-        }
+        },
       );
-      const text = await res.json();
-      setSummary(text.Summary);
+
       if (res.ok) {
+        const text = await res.json();
+        setSummary(text.Summary);
         setWrite(true);
         setLoading(false);
       } else {

@@ -22,6 +22,7 @@ public class SummaryService {
     private CohereConfig config;
 
     public String extractedText(MultipartFile file) throws IOException, TikaException {
+        System.out.println("hi");
         String data = tika.parseToString(file.getInputStream());
         return data;
     }
@@ -36,8 +37,7 @@ public class SummaryService {
                         .message("Summarize : " + text)
                         .model("command-a-03-2025")
 
-                        .build() // ✅ You missed this
-        );
+                        .build());
 
         return response.getText();
     }
