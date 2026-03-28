@@ -21,7 +21,7 @@ function App() {
       formData.append("file", file);
 
       const res = await fetch(
-        "http://localhost:8080/summarize", // "https://ai-document-summary-backend.onrender.com/summarize",
+        "https://ai-document-summary-backend.onrender.com/summarize",
         {
           method: "POST",
           body: formData,

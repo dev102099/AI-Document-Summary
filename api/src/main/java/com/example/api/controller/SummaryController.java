@@ -18,7 +18,7 @@ public class SummaryController {
     @Autowired
     private SummaryService summaryService;
 
-    @CrossOrigin(origins = "http://localhost:5173") // "https://ai-document-summary.onrender.com")
+    @CrossOrigin(origins = "https://ai-document-summary.onrender.com")
     @PostMapping("/summarize")
     public ResponseEntity<?> returnSummary(@RequestParam("file") MultipartFile file) {
         try {
