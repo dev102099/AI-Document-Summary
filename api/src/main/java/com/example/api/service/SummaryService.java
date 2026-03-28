@@ -1,9 +1,13 @@
 package com.example.api.service;
 
+import java.util.concurrent.TimeUnit;
+
 import com.cohere.api.Cohere;
+import com.cohere.api.core.RequestOptions;
 import com.cohere.api.requests.ChatRequest;
 import com.cohere.api.types.NonStreamedChatResponse;
 import com.example.api.config.CohereConfig;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,16 +32,19 @@ public class SummaryService {
     }
 
     public String summarize(String text) {
-        Cohere cohere = Cohere.builder()
-                .token(config.getApiKey()) // Replace with your actual API key
+
+        // 2. Pass the custom client into the Cohere builder
+        Cohere cohere = Cohere.builder().token(config.getApiKey()).build();
+
+        // 3. Build the request instruction
+        ChatRequest request = ChatRequest.builder()
+                .message("Please provide a clear and concise summary of the following text:\n\n" + text)
                 .build();
 
         NonStreamedChatResponse response = cohere.chat(
-                ChatRequest.builder()
-                        .message("Summarize : " + text)
-                        .model("command-a-03-2025")
+                request, RequestOptions.builder().timeout(60, TimeUnit.SECONDS).build()
 
-                        .build());
+        );
 
         return response.getText();
     }
